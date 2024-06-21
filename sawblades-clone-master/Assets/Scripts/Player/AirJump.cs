@@ -43,7 +43,6 @@ public class AirJump : BehaviourAbstract
             switch (context.phase)
             {
                 case InputActionPhase.Started:
-                    Debug.Log(_canAirJump);
                     if (!_collisionState.IsGrounded && _canAirJump)
                     {
                         _canAirJump = false;

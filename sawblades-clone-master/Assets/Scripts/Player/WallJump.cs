@@ -46,7 +46,7 @@ public class WallJump : BehaviourAbstract
 
                         _playerState.IsWallSliding = false;
                         _playerState.IsWallJumping = true;
-                        _rb2d.velocity = new Vector2((_playerState.IsFacingLeft ? -1 : 1) * _wallJumpDistance / _timeToWallJump, Mathf.Sqrt(-2.0f * Physics2D.gravity.y * _wallJumpHeight));
+                        _rb2d.velocity = new Vector2((_playerState.IsFacingLeft ? -1 : 1) * _wallJumpDistance, Mathf.Sqrt(-2.0f * Physics2D.gravity.y * _wallJumpHeight));
                         _wallJumpTimer = 0f;
                     }
 

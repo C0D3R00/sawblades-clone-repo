@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 
+// death on bottom of level, maybe put spikes or fire below
+// means the player must stay on the walls or in the air always
+
 public class Jump : BehaviourAbstract
 {
     [SerializeField]

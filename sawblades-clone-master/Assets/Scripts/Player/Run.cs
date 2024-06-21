@@ -8,8 +8,8 @@ public class Run : BehaviourAbstract
 {
     [SerializeField]
     private float
-        _walkSpeed = 25f,
-        _walkThreshold = .25f;
+        _runSpeed = 25f,
+        _runThreshold = .25f;
 
     private float
         _xAxis = 0f;
@@ -18,7 +18,7 @@ public class Run : BehaviourAbstract
     {
         if ((_playerState.IsWallJumping && Mathf.Abs(_xAxis) > 0f) ||
             !_playerState.IsWallJumping)
-            _rb2d.velocity = new Vector2(_xAxis * _walkSpeed, _rb2d.velocity.y);        
+            _rb2d.velocity = new Vector2(_xAxis * _runSpeed, _rb2d.velocity.y);        
 
         if (_xAxis != 0f)
             _playerState.IsRunning = true;
@@ -40,11 +40,11 @@ public class Run : BehaviourAbstract
         {
             var move = context.ReadValue<Vector2>();
 
-            if (move.x > _walkThreshold)
+            if (move.x > _runThreshold)
             {
                 _xAxis = 1f;
             }
-            else if (move.x < -_walkThreshold)
+            else if (move.x < -_runThreshold)
             {
                 _xAxis = -1f;
             }

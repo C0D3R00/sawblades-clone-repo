@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class WallSlide : BehaviourAbstract
 {
-    [SerializeField]
-    private Transform
-        _body;
+    //[SerializeField]
+    //private Transform
+    //    _body;
 
     [SerializeField]
     private float
-        _wallSlideVelocity = -0.5f,
-        _spriteOffsetX = .4f;
+        _wallSlideVelocity = -0.5f/*,
+        _spriteOffsetX = .4f*/;
 
     protected override void FixedUpdate()
     {
@@ -22,7 +22,7 @@ public class WallSlide : BehaviourAbstract
             }
             else
             {
-                _body.transform.localPosition = Vector2.zero;
+                //_body.transform.localPosition = Vector2.zero;
                 _playerState.IsWallSliding = false;
             }
         }
@@ -31,16 +31,16 @@ public class WallSlide : BehaviourAbstract
             ((_playerState.IsFacingLeft && _collisionState.IsOnWallLeft) ||
             (!_playerState.IsFacingLeft && _collisionState.IsOnWallRight)))
         {
-            if (_playerState.IsFacingLeft)
-            {
-                _spriteOffsetX = -Mathf.Abs(_spriteOffsetX);
-            }
-            else
-            {
-                _spriteOffsetX = Mathf.Abs(_spriteOffsetX);
-            }
+            //if (_playerState.IsFacingLeft)
+            //{
+            //    _spriteOffsetX = -Mathf.Abs(_spriteOffsetX);
+            //}
+            //else
+            //{
+            //    _spriteOffsetX = Mathf.Abs(_spriteOffsetX);
+            //}
 
-            _body.transform.localPosition = new Vector3(_spriteOffsetX, 0f);
+            //_body.transform.localPosition = new Vector3(_spriteOffsetX, 0f);
             _playerState.IsWallSliding = true;
             _playerState.IsFacingLeft = !_playerState.IsFacingLeft;            
         }
