@@ -17,6 +17,11 @@ public class CollisionState : MonoBehaviour
         _raycastOriginBottomRight;
 
     [SerializeField]
+    private LayerMask
+        _groundLayer,
+        _sawbladeLayer;
+
+    [SerializeField]
     private int
         _horizontalRaycastCount = 8,
         _verticalRaycastCount = 8;
@@ -42,14 +47,12 @@ public class CollisionState : MonoBehaviour
         var endX = _raycastOriginBottomRight.position.x;
         var positionY = _raycastOriginBottomLeft.position.y;
         var incrementX = (endX - startX) / (_horizontalRaycastCount - 1);
-        var groundHit = false;
         var raycastPositionX = startX;
 
         for (var i = 0; i < _horizontalRaycastCount; i++)
         {
             var raycastOrigin = new Vector2(raycastPositionX, positionY);
-
-            groundHit = Physics2D.Raycast(raycastOrigin, Vector2.down, _raycastDistance, 1 << LayerMask.NameToLayer("Ground"));
+            var groundHit = Physics2D.Raycast(raycastOrigin, Vector2.down, _raycastDistance, _groundLayer);
 
             if (groundHit)
                 return true;
@@ -58,16 +61,6 @@ public class CollisionState : MonoBehaviour
         }
 
         return false;
-
-        //var raycastPosition = new Vector2(transform.position.x, _boxCollider2d.bounds.min.y);
-        //var hit = Physics2D.Raycast(raycastPosition, Vector2.down, _verticalRaycastDistance, 1 << LayerMask.NameToLayer("ground"));
-
-        //Debug.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - _verticalRaycastDistance, 0f), Color.green);
-
-        //if (hit)
-        //    IsGrounded = true;
-        //else
-        //    IsGrounded = false;
     }
 
     private bool CheckForRoof()
@@ -76,16 +69,14 @@ public class CollisionState : MonoBehaviour
         var endX = _raycastOriginTopRight.position.x;
         var positionY = _raycastOriginTopLeft.position.y;
         var incrementX = (endX - startX) / (_horizontalRaycastCount - 1);
-        var groundHit = false;
         var raycastPositionX = startX;
 
         for (var i = 0; i < _horizontalRaycastCount; i++)
         {
             var raycastOrigin = new Vector2(raycastPositionX, positionY);
+            var roofHit = Physics2D.Raycast(raycastOrigin, Vector2.up, _raycastDistance, _groundLayer);
 
-            groundHit = Physics2D.Raycast(raycastOrigin, Vector2.up, _raycastDistance, 1 << LayerMask.NameToLayer("Ground"));
-
-            if (groundHit)
+            if (roofHit)
                 return true;
 
             raycastPositionX += incrementX;
@@ -100,36 +91,20 @@ public class CollisionState : MonoBehaviour
         var endY = _raycastOriginBottomRight.position.y;
         var positionX = _raycastOriginTopLeft.position.x;
         var incrementY = (endY - startY) / (_verticalRaycastCount - 1);
-        var groundHit = false;
         var raycastPositionY = startY;
 
         for (var i = 0; i < _verticalRaycastCount; i++)
         {
             var raycastOrigin = new Vector2(positionX, raycastPositionY);
+            var wallHit = Physics2D.Raycast(raycastOrigin, Vector2.left, _raycastDistance, _groundLayer);
 
-            groundHit = Physics2D.Raycast(raycastOrigin, Vector2.left, _raycastDistance, 1 << LayerMask.NameToLayer("Ground"));
-
-            if (groundHit)
+            if (wallHit)
                 return true;
 
             raycastPositionY += incrementY;
         }
 
         return false;
-
-        //var raycastPosition = IsFacingRight ?
-        //                      new Vector2(_boxCollider2d.bounds.min.x, transform.position.y) :
-        //                      new Vector2(_boxCollider2d.bounds.max.x, transform.position.y);
-        //var hit = Physics2D.Raycast(raycastPosition, IsFacingRight ? Vector2.left : Vector2.right, _horizontalRaycastDistance, 1 << LayerMask.NameToLayer("wall"));
-
-        //Debug.DrawLine(raycastPosition, raycastPosition + ((IsFacingRight ? Vector2.left : Vector2.right) * _horizontalRaycastDistance), Color.red);
-
-        //if (hit)
-        //{
-        //    IsFacingRight = !IsFacingRight;
-
-        //    _player.rotation = Quaternion.Euler(new Vector3(0f, (IsFacingRight ? 180f : 0f), 0f));
-        //}
     }
 
     private bool CheckForWallRight()
@@ -138,16 +113,14 @@ public class CollisionState : MonoBehaviour
         var endY = _raycastOriginBottomRight.position.y;
         var positionX = _raycastOriginTopRight.position.x;
         var incrementY = (endY - startY) / (_verticalRaycastCount - 1);
-        var groundHit = false;
         var raycastPositionY = startY;
 
         for (var i = 0; i < _verticalRaycastCount; i++)
         {
             var raycastOrigin = new Vector2(positionX, raycastPositionY);
+            var wallHit = Physics2D.Raycast(raycastOrigin, Vector2.right, _raycastDistance, _groundLayer);
 
-            groundHit = Physics2D.Raycast(raycastOrigin, Vector2.right, _raycastDistance, 1 << LayerMask.NameToLayer("Ground"));
-
-            if (groundHit)
+            if (wallHit)
                 return true;
 
             raycastPositionY += incrementY;
@@ -155,7 +128,41 @@ public class CollisionState : MonoBehaviour
 
         return false;
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Sawblade"))
+        {
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                Vector2 contactPoint = contact.point;
+                Vector2 center = collision.collider.bounds.center;
 
+                if (contactPoint.x > center.x)
+                {
+                    Debug.Log("Collision on the right side");
+
+                    gameObject.SetActive(false);
+                }
+                else if (contactPoint.x < center.x)
+                {
+                    Debug.Log("Collision on the left side");
+
+                    gameObject.SetActive(false);
+                }
+
+                if (contactPoint.y > center.y)
+                {
+                    Debug.Log("Collision on the top side");
+                }
+                else if (contactPoint.y < center.y)
+                {
+                    Debug.Log("Collision on the bottom side");
+
+                    gameObject.SetActive(false);
+                }
+            }
+        }
+    }
     private void OnDrawGizmos()
     {
         // gizmo for ground check
