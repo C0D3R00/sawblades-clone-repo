@@ -19,6 +19,7 @@ public class CollisionState : MonoBehaviour
     [SerializeField]
     private LayerMask
         _groundLayer,
+        _roofLayer,
         _sawbladeLayer;
 
     [SerializeField]
@@ -55,7 +56,9 @@ public class CollisionState : MonoBehaviour
             var groundHit = Physics2D.Raycast(raycastOrigin, Vector2.down, _raycastDistance, _groundLayer);
 
             if (groundHit)
+            {
                 return true;
+            }
 
             raycastPositionX += incrementX;
         }
@@ -74,7 +77,7 @@ public class CollisionState : MonoBehaviour
         for (var i = 0; i < _horizontalRaycastCount; i++)
         {
             var raycastOrigin = new Vector2(raycastPositionX, positionY);
-            var roofHit = Physics2D.Raycast(raycastOrigin, Vector2.up, _raycastDistance, _groundLayer);
+            var roofHit = Physics2D.Raycast(raycastOrigin, Vector2.up, _raycastDistance, _roofLayer);
 
             if (roofHit)
                 return true;
@@ -136,8 +139,14 @@ public class CollisionState : MonoBehaviour
             {
                 Vector2 contactPoint = contact.point;
                 Vector2 center = collision.collider.bounds.center;
+                
+                if (contactPoint.y > center.y)
+                {
+                    Debug.Log("Collision on the top side");
 
-                if (contactPoint.x > center.x)
+                    break;
+                }
+                else if (contactPoint.x > center.x)
                 {
                     Debug.Log("Collision on the right side");
 
@@ -148,11 +157,6 @@ public class CollisionState : MonoBehaviour
                     Debug.Log("Collision on the left side");
 
                     gameObject.SetActive(false);
-                }
-
-                if (contactPoint.y > center.y)
-                {
-                    Debug.Log("Collision on the top side");
                 }
                 else if (contactPoint.y < center.y)
                 {
