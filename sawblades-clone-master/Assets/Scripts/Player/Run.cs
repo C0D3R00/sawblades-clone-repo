@@ -36,20 +36,17 @@ public class Run : BehaviourAbstract
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (enabled)
-        {
-            var move = context.ReadValue<Vector2>();
+        var move = context.ReadValue<Vector2>();
 
-            if (move.x > _runThreshold)
-            {
-                _xAxis = 1f;
-            }
-            else if (move.x < -_runThreshold)
-            {
-                _xAxis = -1f;
-            }
-            else
-                _xAxis = 0f;
+        if (move.x > _runThreshold)
+        {
+            _xAxis = 1f;
         }
+        else if (move.x < -_runThreshold)
+        {
+            _xAxis = -1f;
+        }
+        else
+            _xAxis = 0f;
     }
 }

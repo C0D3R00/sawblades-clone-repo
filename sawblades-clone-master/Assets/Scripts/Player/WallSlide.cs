@@ -24,6 +24,8 @@ public class WallSlide : BehaviourAbstract
             {
                 //_body.transform.localPosition = Vector2.zero;
                 _playerState.IsWallSliding = false;
+
+                ToggleScripts(true);
             }
         }
         else if (!_collisionState.IsGrounded &&
@@ -42,7 +44,9 @@ public class WallSlide : BehaviourAbstract
 
             //_body.transform.localPosition = new Vector3(_spriteOffsetX, 0f);
             _playerState.IsWallSliding = true;
-            _playerState.IsFacingLeft = !_playerState.IsFacingLeft;            
+            _playerState.IsFacingLeft = !_playerState.IsFacingLeft;
+
+            ToggleScripts(false);
         }
     }
 }
