@@ -16,7 +16,7 @@ public class AnimationState : BehaviourAbstract
         _animator.SetFloat("VelocityY", _rb2d.velocity.y);
         _animator.SetBool("IsGrounded", _collisionState.IsGrounded);
         _animator.SetBool("IsJumping", _playerState.IsJumping);
-        _animator.SetBool("IsDoubleJumping", _playerState.IsAirJumping);
+        _animator.SetBool("IsAirJumping", _playerState.IsAirJumping);
         _animator.SetBool("IsWallSliding", _playerState.IsWallSliding);
         _animator.SetBool("IsWallJumping", _playerState.IsWallJumping);
     }
