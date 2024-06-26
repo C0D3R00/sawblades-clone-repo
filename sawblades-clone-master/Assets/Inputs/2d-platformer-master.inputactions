@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Run",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "b99c2ad0-dbfd-4e5c-97c9-c27d2b6f2ee1",
                     "expectedControlType": "Vector2",
                     "processors": "",
