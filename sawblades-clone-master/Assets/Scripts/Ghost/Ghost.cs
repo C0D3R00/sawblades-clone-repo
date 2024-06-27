@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Sawblade : MonoBehaviour
+public class Ghost : MonoBehaviour
 {
+    [SerializeField]
+    private Animator
+        _animator;
+
     public float 
         _moveSpeed = 5f;
 
     private Rigidbody2D 
         _rb;
-
+        
     private Vector2 
         _moveDirection;
 
@@ -38,5 +43,19 @@ public class Sawblade : MonoBehaviour
         var initialAngle = Random.Range(225f, 315f);
 
         _moveDirection = new Vector2(Mathf.Cos(initialAngle * Mathf.Deg2Rad), Mathf.Sin(initialAngle * Mathf.Deg2Rad)).normalized;
+    }
+    private IEnumerator DieCo()
+    {
+        yield return new WaitForSeconds(1f);
+
+        gameObject.SetActive(false);
+
+        _animator.SetBool("IsStomped", false);
+    }
+    public void OnStomped()
+    {
+        _animator.SetBool("IsStomped", true);
+
+        StartCoroutine(DieCo());
     }
 }

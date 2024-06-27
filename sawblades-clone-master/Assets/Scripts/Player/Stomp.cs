@@ -40,9 +40,10 @@ public class Stomp : BehaviourAbstract
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Sawblade"))
+        if (collision.CompareTag("Ghost"))
         {
-            collision.gameObject.SetActive(false);
+            //collision.gameObject.SetActive(false);
+            collision.GetComponent<Ghost>().OnStomped();
 
             _rb2d.velocity = new Vector2(_rb2d.velocity.x, _jumpHeight);
         }
