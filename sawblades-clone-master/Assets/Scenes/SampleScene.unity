@@ -1349,8 +1349,8 @@ Transform:
   m_GameObject: {fileID: 804598351}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.5149999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -3.2649999, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1498535095}
@@ -2195,7 +2195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemsToPool:
-  - ObjectToPool: {fileID: 119604544857896844, guid: baff36d6f7d3add42ae18961139a0fe9, type: 3}
+  - ObjectToPool: {fileID: 8180947689432405298, guid: 841f2ec0f0c40fd448338f04e317e57d, type: 3}
     Type: 0
     AmountToPool: 5
     ShouldExpand: 1
@@ -2630,12 +2630,12 @@ GameObject:
   - component: {fileID: 2145006101}
   - component: {fileID: 2145006102}
   m_Layer: 0
-  m_Name: Sawblades Manager
+  m_Name: Ghosts Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2145006101
 Transform:
   m_ObjectHideFlags: 0
@@ -2667,8 +2667,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _left: {fileID: 118099579}
   _right: {fileID: 194678859}
-  _minSpawnInterval: 0.5
-  _maxSpawnInterval: 3
+  _minSpawnInterval: 0.25
+  _maxSpawnInterval: 1.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
