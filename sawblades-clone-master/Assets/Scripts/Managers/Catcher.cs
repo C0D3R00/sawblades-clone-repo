@@ -6,11 +6,9 @@ public class Catcher : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Sawblade"))
+        if (collision.CompareTag("Enemy"))
         {
             collision.gameObject.SetActive(false);
-
-            Debug.Log(collision.name);
         }
     }
 }

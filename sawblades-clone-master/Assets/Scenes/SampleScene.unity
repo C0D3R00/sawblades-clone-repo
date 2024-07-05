@@ -1690,7 +1690,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _disabledScripts: []
   _overlapOrigin: {fileID: 216920930}
-  _jumpHeight: 12
+  _stompAirTime: 0.25
+  _stompBounceForce: 2.5
 --- !u!61 &804598364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1698,7 +1699,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804598351}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2630,7 +2631,7 @@ GameObject:
   - component: {fileID: 2145006101}
   - component: {fileID: 2145006102}
   m_Layer: 0
-  m_Name: Ghosts Manager
+  m_Name: Enemies Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2667,8 +2668,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _left: {fileID: 118099579}
   _right: {fileID: 194678859}
-  _minSpawnInterval: 0.25
-  _maxSpawnInterval: 1.5
+  _interval: 2
+  _minEnemy: 1
+  _maxEnemy: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

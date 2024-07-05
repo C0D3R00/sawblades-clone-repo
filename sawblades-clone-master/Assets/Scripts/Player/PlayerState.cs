@@ -10,4 +10,5 @@ public class PlayerState : MonoBehaviour
     public bool IsAirJumping { get; set; }
     public bool IsWallSliding { get; set; }
     public bool IsWallJumping { get; set; }
+    public bool IsStomping { get; set; }
 }

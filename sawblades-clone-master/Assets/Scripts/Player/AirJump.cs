@@ -15,7 +15,7 @@ public class AirJump : BehaviourAbstract
     private bool
         _canAirJump;
 
-    protected override void Update()
+    protected override void LateUpdate()
     {
         if (_playerState.IsAirJumping)
             if (_jumpTimer >= _timeToDoubleJump)
@@ -29,7 +29,8 @@ public class AirJump : BehaviourAbstract
 
         if (_collisionState.IsGrounded ||
            _collisionState.IsOnWallLeft || 
-           _collisionState.IsOnWallRight)
+           _collisionState.IsOnWallRight ||
+           _playerState.IsStomping)
         {
             _playerState.IsAirJumping = false;
             _canAirJump = true;

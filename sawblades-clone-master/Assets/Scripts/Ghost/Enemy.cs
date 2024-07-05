@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Ghost : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private Animator
@@ -49,13 +49,9 @@ public class Ghost : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         gameObject.SetActive(false);
-
-        _animator.SetBool("IsStomped", false);
     }
     public void OnStomped()
     {
-        _animator.SetBool("IsStomped", true);
-
         StartCoroutine(DieCo());
     }
 }

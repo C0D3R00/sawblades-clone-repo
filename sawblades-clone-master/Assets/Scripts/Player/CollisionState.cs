@@ -131,42 +131,6 @@ public class CollisionState : MonoBehaviour
 
         return false;
     }
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Sawblade"))
-        {
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                Vector2 contactPoint = contact.point;
-                Vector2 center = collision.collider.bounds.center;
-                
-                if (contactPoint.y > center.y)
-                {
-                    Debug.Log("Collision on the top side");
-
-                    break;
-                }
-                else if (contactPoint.x > center.x)
-                {
-                    Debug.Log("Collision on the right side");
-
-                    gameObject.SetActive(false);
-                }
-                else if (contactPoint.x < center.x)
-                {
-                    Debug.Log("Collision on the left side");
-
-                    gameObject.SetActive(false);
-                }
-                else if (contactPoint.y < center.y)
-                {
-                    Debug.Log("Collision on the bottom side");
-
-                    gameObject.SetActive(false);
-                }
-            }
-        }
-    }
     private void OnDrawGizmos()
     {
         // gizmo for ground check

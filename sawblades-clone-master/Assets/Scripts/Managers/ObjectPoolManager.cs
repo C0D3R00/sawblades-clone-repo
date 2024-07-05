@@ -9,7 +9,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     public enum ObjectPoolType
     {
-        GHOST
+        ENEMY   
     }
 
     protected ObjectPoolManager() { }

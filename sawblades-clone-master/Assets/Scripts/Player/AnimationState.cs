@@ -19,5 +19,6 @@ public class AnimationState : BehaviourAbstract
         _animator.SetBool("IsAirJumping", _playerState.IsAirJumping);
         _animator.SetBool("IsWallSliding", _playerState.IsWallSliding);
         _animator.SetBool("IsWallJumping", _playerState.IsWallJumping);
+        _animator.SetBool("IsStomping", _playerState.IsStomping);
     }
 }
